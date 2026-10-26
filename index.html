@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Second Floor for Rent</title>
-<meta name="description" content="325 sq ft second floor for rent: master bedroom, study/WFH room, separate kitchen, bathroom with geyser, sunny gallery, 24x7 water.">
+<meta name="description" content="325 sq ft second floor for rent, for working professionals: air-conditioned, perfect for work from home, master bedroom, study/WFH room, separate kitchen, bathroom with geyser, 24x7 water.">
 <style>
   :root{
     --bg:#faf7f2; --card:#ffffff; --ink:#2b2622; --muted:#6f655c;
@@ -24,6 +24,9 @@
     box-shadow:0 2px 8px rgba(0,0,0,.05)}
   .fact b{display:block;font-size:1.15rem;color:var(--accent)}
   .fact span{font-size:.85rem;color:var(--muted)}
+  .notice{background:#fff;border:2px solid var(--accent);border-radius:14px;padding:14px 16px;margin:0 0 18px;
+    display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;font-weight:700}
+  .notice .yes{color:#2e7d32} .notice .no{color:#c62828}
   section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:18px}
   section h2{margin:0 0 4px;font-size:1.2rem}
   section h2 small{font-weight:600;color:var(--accent);font-size:.9rem}
@@ -57,15 +60,22 @@
 <header>
   <span class="tag">To Let</span>
   <h1>Second Floor for Rent</h1>
-  <p>Bright, airy, independent floor in a central area with all amenities</p>
+  <p>Bright, airy, air-conditioned floor in a central area. Perfect for work from home.</p>
 </header>
 
 <main>
   <div class="facts">
     <div class="fact"><b>325 sq ft</b><span>Total area</span></div>
     <div class="fact"><b>1 + Study</b><span>Bedroom &amp; WFH room</span></div>
+    <div class="fact"><b>AC</b><span>Air conditioning available</span></div>
+    <div class="fact"><b>WFH ready</b><span>Separate study room</span></div>
     <div class="fact"><b>Separate</b><span>Kitchen &amp; bathroom</span></div>
     <div class="fact"><b>24×7</b><span>Water (submersible)</span></div>
+  </div>
+
+  <div class="notice">
+    <span class="yes">✓ Only for working professionals</span>
+    <span class="no">✕ Not for students</span>
   </div>
 
   <section>
@@ -88,7 +98,7 @@
 
   <section>
     <h2>Study Room / WFH Space <small>12 × 6 ft</small></h2>
-    <p>East-facing with its own separate entrance, good ventilation and lots of daylight. Works well as a home office or study room.</p>
+    <p><b>Perfect for a work-from-home setup.</b> East-facing with its own separate entrance, good ventilation and lots of daylight, so your workspace stays separate from your bedroom.</p>
     <div class="photos">
       <button><img src="photos/study_room.jpg" alt="East-facing study room with separate entrance" loading="lazy"></button>
       <button><img src="photos/study_room_view2.jpg" alt="Another view of study room" loading="lazy"></button>
@@ -126,14 +136,17 @@
   <section class="more">
     <h2>Also</h2>
     <ul>
+      <li>Air conditioning available</li>
+      <li>Perfect for work from home, with a dedicated study room</li>
       <li>24×7 water supply through submersible</li>
       <li>Central area with all amenities nearby</li>
+      <li>Only for working professionals (not for students)</li>
     </ul>
   </section>
 
   <section class="contact">
     <h2>Interested?</h2>
-    <p>Contact the owner for more details and to schedule a visit.</p>
+    <p>Working professionals, contact the owner for more details and to schedule a visit.</p>
     <div class="btns" id="btns"></div>
   </section>
 </main>
@@ -157,7 +170,7 @@
     document.getElementById("btns").innerHTML =
       '<a class="btn call" href="tel:+' + PHONE + '">📞 Call</a>' +
       '<a class="btn wa" href="https://wa.me/' + PHONE +
-      '?text=' + encodeURIComponent("Hi, I saw the second floor rental photos. Is it still available?") +
+      '?text=' + encodeURIComponent("Hi, I am a working professional and saw the second floor rental photos. Is it still available?") +
       '">WhatsApp</a>';
   }
 
