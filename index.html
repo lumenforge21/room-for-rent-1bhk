@@ -162,7 +162,7 @@
   <section class="form" id="interest">
     <h2>Interested? Leave your details</h2>
     <p>If you are interested, please fill in the form below. I will contact you if the room is available.</p>
-    <form id="interestForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="interestForm" action="https://formspree.io/f/xyeeevqz" method="POST">
       <div class="two">
         <label>Name
           <input name="name" type="text" required autocomplete="name" maxlength="80">
@@ -244,7 +244,7 @@
   const form = document.getElementById("interestForm"), msg = document.getElementById("formMsg");
   form.addEventListener("submit", async e => {
     e.preventDefault();
-    if (form.action.includes("xyeeevqz")) {
+    if (form.action.includes("YOUR_FORM_ID")) {
       msg.className = "err"; msg.textContent = "The form isn't connected yet. Please contact the owner directly."; return;
     }
     const btn = form.querySelector("button[type=submit]");
