@@ -49,6 +49,12 @@
   .form label{display:grid;gap:4px;font-weight:600;font-size:.92rem}
   .form input{font:inherit;padding:11px 12px;border:1px solid #cdbfb2;border-radius:10px;background:#fff;color:var(--ink);width:100%}
   .form input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .form textarea{font:inherit;padding:11px 12px;border:1px solid #cdbfb2;border-radius:10px;background:#fff;color:var(--ink);
+    width:100%;min-height:130px;resize:vertical}
+  .form textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .form .hint{font-weight:400;font-size:.8rem;color:var(--muted)}
+  #wc{font-size:.8rem;font-weight:600;color:var(--muted);justify-self:end;margin-top:-6px}
+  #wc.ok{color:#2e7d32} #wc.bad{color:#c62828}
   .form .note{font-size:.8rem;color:var(--muted);margin:0}
   .form button[type=submit]{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:999px;
     padding:13px 22px;cursor:pointer;justify-self:start}
@@ -183,6 +189,11 @@
                  pattern="(\+91 ?)?[6-9][0-9]{9}" title="Enter a 10-digit Indian mobile number" placeholder="10-digit mobile">
         </label>
       </div>
+      <label>Add your specific comments or queries <span class="hint">(optional, up to 50 words)</span>
+        <textarea name="comments" id="comments"
+          placeholder="Tell us a little about yourself: who will stay, your expected move-in date, how long you plan to stay, work timings, any questions about the room."></textarea>
+      </label>
+      <div id="wc" aria-live="polite">0 / 50 words</div>
       <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" name="_subject" value="New enquiry: Second floor for rent">
       <p class="note">Your details are used only to contact you about this room.</p>
@@ -240,6 +251,21 @@
   lb.addEventListener("touchstart", e => x0 = e.touches[0].clientX, {passive:true});
   lb.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0;
     if (Math.abs(dx) > 40) show(dx < 0 ? i+1 : i-1); x0 = null; });
+  // Comments: up to 50 words
+  const MAX_WORDS = 50;
+  const box = document.getElementById("comments"), wc = document.getElementById("wc");
+  const words = t => (t.trim().match(/\S+/g) || []).length;
+  function checkWords(){
+    let n = words(box.value);
+    if (n > MAX_WORDS) {                       // cut off anything after 50 words
+      const m = box.value.match(new RegExp("^\\s*(\\S+\\s+){" + (MAX_WORDS - 1) + "}\\S+"));
+      if (m) box.value = m[0]; n = MAX_WORDS;
+    }
+    wc.textContent = n + " / " + MAX_WORDS + " words";
+    wc.className = n >= MAX_WORDS ? "bad" : "";
+  }
+  box.addEventListener("input", checkWords); checkWords();
+
   // Interest form: send without leaving the page
   const form = document.getElementById("interestForm"), msg = document.getElementById("formMsg");
   form.addEventListener("submit", async e => {
@@ -252,7 +278,7 @@
     try {
       const r = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
       if (!r.ok) throw new Error();
-      form.reset(); msg.className = "ok"; msg.textContent = "Thank you! Your details have been received. I will contact you if the room is available.";
+      form.reset(); checkWords(); msg.className = "ok"; msg.textContent = "Thank you! Your details have been received. I will contact you if the room is available.";
     } catch {
       msg.className = "err"; msg.textContent = "Sorry, something went wrong. Please try again or contact the owner directly.";
     } finally { btn.disabled = false; }
